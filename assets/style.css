@@ -1,0 +1,481 @@
+:root {
+    --gov-green: #0f9d45;
+    --gov-green-dark: #033d17;
+    --ez-red: red;
+    --ez-gold: #ffc107;
+    --ez-dark: #212529;
+}
+
+
+/* General */
+
+body {
+    background: #f4f7f9;
+    font-family: Arial, sans-serif;
+}
+
+
+/* Header */
+
+header {
+    background: linear-gradient(90deg, var(--gov-green-dark), var(--gov-green));
+}
+
+
+/* Hero */
+
+.hero {
+    padding: 80px 20px;
+}
+
+
+/* Cards */
+
+.card {
+    border: none;
+    border-bottom: 5px solid var(--gov-green);
+    border-radius: 15px;
+    transition: .3s ease;
+}
+
+.kard {
+    border: none;
+    border-left: 5px solid var(--gov-green);
+    border-radius: 15px;
+    transition: .3s ease;
+}
+
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* New Card Variants */
+
+.card-mission {
+    border-left: 5px solid #0d6efd;
+    border-bottom: none;
+}
+
+.card-vision {
+    border-left: 5px solid #ffc107;
+    border-bottom: none;
+}
+
+.card-values {
+    border-left: 5px solid #dc3545;
+    border-bottom: none;
+}
+
+.card-project {
+    border-top: 5px solid var(--gov-green);
+    border-bottom: none;
+}
+
+.card-contact {
+    border-left: 5px solid var(--gov-green-dark);
+    border-bottom: none;
+}
+
+.card-highlight {
+    background: linear-gradient(
+        135deg,
+        rgba(15,157,69,.06),
+        rgba(255,255,255,1)
+    );
+    border-left: 5px solid var(--gov-green);
+    border-bottom: none;
+}
+
+
+/* Card headings */
+
+.card h4 {
+    color: var(--gov-green-dark);
+    font-weight: 700;
+}
+
+/* Card color variations */
+
+.card-admin {
+    border-bottom-color: var(--ez-red);
+}
+
+.card-live {
+    border-bottom-color: var(--ez-gold);
+}
+
+.card-queue {
+    border-bottom-color: var(--ez-dark);
+}
+
+.card-comments {
+    border-bottom-color: #0d6efd;
+}
+
+.card-staff {
+    border-bottom-color: #28a745;
+}
+
+
+/* Buttons */
+
+.btn {
+    border-radius: 10px;
+}
+
+
+/* Tables */
+
+table {
+    background: white;
+}
+
+/* FOOTER */
+footer{
+    margin-top:50px;
+    background:linear-gradient(90deg,var(--gov-green-dark),var(--gov-green));
+    color:#fff;
+    padding:30px 0 0;   /* Remove horizontal padding */
+}
+
+/* Inner footer content */
+.footer-content{
+    max-width:1200px;
+    margin:auto;
+    padding:0 20px;
+}
+
+/* Tomorrow text */
+.footer-title{
+    text-align:center;
+    font-size:42px;
+    font-weight:400;
+    font-style:italic;
+    letter-spacing:.25em;
+    white-space:nowrap;          /* Keep on one line */
+    padding:5px 0 20px;
+    margin:0;
+    text-shadow:
+        2px 2px 6px rgba(0,0,0,.4),
+        0 0 10px rgba(255,255,255,.35);
+}
+
+
+/* Images */
+.footer-images{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:40px;
+    flex-wrap:wrap;
+    padding:20px;
+}
+
+.footer-images img{
+    width:170px;
+    height:170px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+/* Center text */
+.footer-center-text{
+    font-size:30px;
+    font-weight:700;
+    color:var(--ez-red);
+    text-align:center;
+    min-width:220px;
+}
+
+/* Copyright bar */
+.footer-bottom{
+    margin-top:40px;
+    width:100%;
+    background:var(--ez-red);
+    color:#fff;
+    text-align:center;
+    font-size:18px;
+    padding:22px 15px;
+    border-top:3px solid gold;
+    box-sizing:border-box;
+}
+
+.footer-bottom a{
+    color:#007bff;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.footer-bottom a:hover{
+    text-decoration:underline;
+}
+
+/* Mobile */
+@media (max-width:576px){
+
+    .footer-title{
+        font-size:18px;
+        letter-spacing:.50em;   /* Much smaller spacing */
+        padding:0 8px;
+        margin-left:-8px;
+        margin-right:-8px;
+        margin-top:-10px;
+        margin-bottom:25px;
+        width:100%;
+    }
+
+    .footer-images{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    }
+
+    .footer-images img{
+        width:80px;
+        height:80px;
+        flex-shrink:0;
+    }
+
+    .footer-center-text{
+        font-size:18px;
+        min-width:0;
+        flex:1;
+        text-align:center;
+    }
+
+    .footer-bottom{
+        font-size:15px;
+        padding:18px 10px;
+    }
+}
+
+ /*** Team ***/
+.team-carousel {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.team-track {
+    display: flex;
+    gap: 25px;
+    width: max-content;
+    animation: teamScroll 30s linear infinite;
+}
+
+.team-item {
+    min-width: 350px;
+    background: #fff;
+    box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+    flex-shrink: 0;
+}
+
+.team-item img {
+    border-radius: 8px 60px 0 0;
+    object-fit: cover;
+    height: 280px;
+}
+
+.team-item .team-social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: #FFFFFF;
+    padding-top: 15px;
+}
+
+.team-item .team-social a {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team-item h5 {
+    font-weight: 700;
+    color: var(--gov-green-dark);
+}
+
+.team-item span {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/* Infinite scroll */
+@keyframes teamScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause on hover */
+.team-carousel:hover .team-track {
+    animation-play-state: paused;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .team-item {
+        min-width: 280px;
+    }
+
+    .team-item img {
+        height: 220px;
+    }
+}
+
+.activity-carousel {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.activity-carousel .carousel-track {
+  display: flex;              /* force horizontal row */
+  flex-wrap: nowrap;          /* prevent wrapping vertically */
+  animation: scroll-left 40s linear infinite;
+}
+
+.activity-item {
+  flex: 0 0 180px;            /* fixed width block */
+  margin-right: 15px;
+  text-align: center;
+}
+
+.activity-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;          /* crop neatly */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.activity-item p {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Animation keyframes */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Mobile responsiveness */
+@media(max-width:576px){
+  .activity-item {
+    flex: 0 0 120px;
+    margin-right: 10px;
+  }
+  .activity-item img {
+    height: 80px;
+  }
+  .activity-item p {
+    font-size: 13px;
+  }
+}
+
+
+
+/* ====================== PROJECT CARDS - RESPONSIVE & UNIFORM ====================== */
+.card-project {
+    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.card-project:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Uniform Image with Responsive Aspect Ratio */
+.card-project img {
+    width: 100% !important;
+    height: 220px !important;           /* Base height for larger screens */
+    object-fit: cover;
+    object-position: center;
+    flex-shrink: 0;
+}
+
+/* Make it more responsive using aspect-ratio (modern browsers) */
+@supports (aspect-ratio: 16/10) {
+    .card-project img {
+        height: auto !important;
+        aspect-ratio: 16 / 10;           /* Wide landscape - good for projects */
+    }
+}
+
+/* Card Body */
+.card-project .p-4 {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.35rem !important;
+}
+
+.card-project h5 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.35;
+    font-weight: 600;
+}
+
+.card-project p {
+    flex-grow: 1;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 0;
+}
+
+/* Badge */
+.card-project .badge {
+    font-size: 0.78rem;
+    padding: 6px 14px;
+    border-radius: 30px;
+}
+
+/* ====================== MOBILE RESPONSIVENESS ====================== */
+
+@media (max-width: 768px) {
+    .card-project img {
+        height: 200px !important;
+    }
+    
+    .card-project .p-4 {
+        padding: 1.1rem !important;
+    }
+    
+    .card-project h5 {
+        font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-project img {
+        height: 190px !important;
+    }
+    
+    .card-project .p-4 {
+        padding: 1rem !important;
+    }
+}
+
+/* Optional: Slightly larger images on very large screens */
+@media (min-width: 1200px) {
+    .card-project img {
+        height: 245px !important;
+    }
+}
