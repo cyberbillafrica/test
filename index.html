@@ -35,9 +35,20 @@
 
 <script type="module" src="assets/supabase.js"></script>
 
-<script>
+<script type="module">
+// Helper function to read file as Base64 in the browser
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        // Extract only the base64 string part, leaving out the Data URL prefix
+        const base64String = reader.result.split(',')[1];
+        resolve(base64String);
+    };
+    reader.onerror = error => reject(error);
+});
 
-document.getElementById('applicationForm').addEventListener('submit', async function(e) {
+document.getElementById('testForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const submitBtn = this.querySelector('button[type="submit"]');
@@ -50,49 +61,54 @@ document.getElementById('applicationForm').addEventListener('submit', async func
         const skillFile = document.getElementById('skill_evidence').files[0];
         const passportFile = document.getElementById('passport').files[0];
 
+        const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbwMJKXcR0Rs3nwZ5P_gqveVeb-Zm_q_WKJTu786awN9w0LP9do39OXqV_IvvtJZx38/exec';
+
         // Upload Skill Evidence
+        const skillBase64 = await toBase64(skillFile);
         const skillForm = new FormData();
-        skillForm.append('fileData', Utilities.base64Encode(await skillFile.arrayBuffer()));
+        skillForm.append('fileData', skillBase64);
         skillForm.append('filename', `skill_${Date.now()}_${skillFile.name}`);
         skillForm.append('mimeType', skillFile.type);
 
-        const skillRes = await fetch('https://script.google.com/macros/s/AKfycbwMJKXcR0Rs3nwZ5P_gqveVeb-Zm_q_WKJTu786awN9w0LP9do39OXqV_IvvtJZx38/exec', { method: 'POST', body: skillForm });
+        const skillRes = await fetch(googleScriptUrl, { method: 'POST', body: skillForm });
         const skillData = await skillRes.json();
 
         // Upload Passport
+        const passportBase64 = await toBase64(passportFile);
         const passportForm = new FormData();
-        passportForm.append('fileData', Utilities.base64Encode(await passportFile.arrayBuffer()));
+        passportForm.append('fileData', passportBase64);
         passportForm.append('filename', `passport_${Date.now()}_${passportFile.name}`);
         passportForm.append('mimeType', passportFile.type);
 
-        const passportRes = await fetch('https://script.google.com/macros/s/AKfycbwMJKXcR0Rs3nwZ5P_gqveVeb-Zm_q_WKJTu786awN9w0LP9do39OXqV_IvvtJZx38/exec', { method: 'POST', body: passportForm });
+        const passportRes = await fetch(googleScriptUrl, { method: 'POST', body: passportForm });
         const passportData = await passportRes.json();
 
-        // Insert to Supabase
+        // Construct Form Data (Using defaults/placeholders for elements not present in HTML)
         const formData = {
             full_name: document.getElementById('full_name').value.trim(),
-            age: parseInt(document.getElementById('age').value),
-            gender: document.getElementById('gender').value,
-            lga: document.getElementById('lga').value,
-            ward: document.getElementById('ward').value,
-            village: document.getElementById('village').value.trim(),
-            community: document.getElementById('community').value.trim(),
-            phone: document.getElementById('phone').value.trim(),
+            age: 25, // Fallback placeholder since field is missing in current test HTML
+            gender: "Not Specified", 
+            lga: "Test LGA",
+            ward: "Test Ward",
+            village: "Test Village",
+            community: "Test Community",
+            phone: "08000000000",
             nin: document.getElementById('nin').value.trim(),
-            account_name: document.getElementById('account_name').value.trim(),
-            account_number: document.getElementById('account_number').value.trim(),
-            bank_name: document.getElementById('bank_name').value.trim(),
-            skill_type: document.getElementById('skill_type').value.trim(),
-            empowerment_choice: document.getElementById('empowerment_choice').value,
-            skill_evidence_url: skillData.publicUrl,
-            passport_url: passportData.publicUrl,
+            account_name: "Test Account",
+            account_number: "0000000000",
+            bank_name: "Test Bank",
+            skill_type: "Testing",
+            empowerment_choice: "None",
+            skill_evidence_url: skillData.publicUrl || "", 
+            passport_url: passportData.publicUrl || "",
             status: "pending",
             shortlisted: false,
             selected: false,
             rejected: false
         };
 
-        const { error } = await supabase.from('applications').insert([formData]);
+        // Note: Make sure "supabase" client is initialized and exposed globally inside assets/supabase.js
+        const { error } = await window.supabase.from('applications').insert([formData]);
 
         if (error) throw error;
 
@@ -107,10 +123,7 @@ document.getElementById('applicationForm').addEventListener('submit', async func
         submitBtn.innerHTML = originalText;
     }
 });
-
 </script>
-
-
 
 </body>
 </html>
